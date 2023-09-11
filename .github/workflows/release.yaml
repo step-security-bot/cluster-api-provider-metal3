@@ -19,6 +19,11 @@ jobs:
     if: github.repository == 'metal3-io/cluster-api-provider-metal3'
     runs-on: ubuntu-latest
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
+        with:
+          egress-policy: audit
+
       - name: Export RELEASE_TAG var
         run:  echo "RELEASE_TAG=${GITHUB_REF:10}" >> $GITHUB_ENV
       - name: checkout code
